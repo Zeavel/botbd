@@ -102,4 +102,23 @@ else
 
 client.login(process.env.BOT); //вход для бота
 
+client.on("guildMemberAdd", m=>{
+    client.users.get(m.id).send(
 
+`Hello and welcome to the rip netspoof dot rip Support Discord
+----------------------------------------------------------------------------------
+Please note that we are currently in beta.
+      
+:hammer: No Spamming in any of the channels (Except for the spam channel, where you can post anything you want as long as it does not include anything sexual, violent, racist, or hateful)
+:hammer: No Hate Speech, Racism, Sexism, Being Toxic
+:hammer: No advertising and spamming links
+:hammer: Be Respectful To Each Other
+:hammer: If a conversation or joke turns toxic or gets out of control, those causing trouble will be removed
+      
+      
+To verify your account, enter the following command:
+
+   \`\`\`\-link xxxxxx\`\`\`
+      
+Replace "xxxxxx" with the verify code. You can find it in the panel under the Discord link`)
+})
