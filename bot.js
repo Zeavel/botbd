@@ -47,22 +47,50 @@ if(commandIs("link", message))
   //    database    : 'frogsboot'
 
     });
+      var connection2 = mysql.createConnection({
+ 
+   
+      host: process.env.HOST,
+      database: "frogsboot",
+      password: process.env.PASS, 
+      user: process.env.USER
+  //    database    : 'frogsboot'
+
+    });
      
     connection.connect();
 
-    connection.query(`UPDATE users SET discordStatus = '2' WHERE discordCode='${code}';`, function (error, results, fields) {
-        if (error) message.channel.send("Неправильно введен код")
+   
+      connection.query(`SELECT * FROM users WHERE discordCode='${code}';`, function (error2, results2, fields2) {
+        if (error2) message.channel.send("Неправильно введен код")
         if(code == "") message.channel.send("Введите код")
 else
 {
-    console.log('The solution is: ', results);
-        client.guilds.get("514908242292244532").channels.get("514908242716131348").send("<@"+message.author.id+"> got Verified :white_check_mark:")
-        var role = client.guilds.get("514908242292244532").roles.find('name', "USER").id
-        message.member.addRole(role)
+    if(results2[0].discordStatus == "2")
+    {
+        message.channel.send("Нельзя этот код больше использовать")
+
+    }
+    else
+    {
+        connection2.connect();
+        connection2.query(`UPDATE users SET discordStatus = '2' WHERE discordCode='${code}';`, function (error, results, fields) {
+       
+            
+        console.log('The solution is: ', results);
+            client.guilds.get("514908242292244532").channels.get("514908242716131348").send("<@"+message.author.id+"> got Verified :white_check_mark:")
+            var role = client.guilds.get("514908242292244532").roles.find('name', "USER")
+            console.log(role)
+            client.guilds.get("514908242292244532").members.get(message.author.id).addRole(role)
+  
+        
+          })
+          connection2.end();
+    }
+  
 }
     
       });
-
  
 
   
