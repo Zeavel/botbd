@@ -54,6 +54,8 @@ if(commandIs("link", message))
         if (error) message.channel.send("Неправильно введен код")
         console.log('The solution is: ', results);
         client.guilds.get("514908242292244532").channels.get("514908242716131348").send("<@"+message.author.id+"> got Verified :white_check_mark:")
+        var role = client.guilds.get("514908242292244532").roles.find('name', "USER").id
+        message.member.addRole(role)
       });
 
  
